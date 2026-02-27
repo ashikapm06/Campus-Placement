@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: icpms-backend
+    env: node
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        sync: false  # Set manually in Render dashboard
+      - key: JWT_SECRET
+        sync: false  # Set manually in Render dashboard
+      - key: AI_SERVICE_URL
+        sync: false  # Optional: your AI service URL
+
+  - type: web
+    name: icpms-ai
+    env: python
+    region: oregon
+    plan: free
+    rootDir: ai-service
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
