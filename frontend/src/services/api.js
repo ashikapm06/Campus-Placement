@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create a centralized Axios instance
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'https://campus-placement-5mto-qzpima1hr-ashikas-projects-66984d04.vercel.app/api',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -37,5 +37,6 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+export const AI_SERVICE_URL = process.env.REACT_APP_AI_URL;
 
 export default api;
